@@ -1,0 +1,33 @@
+.i-header{
+  width: calc(100% - 100px);
+  height: 60px;
+  display: inline-flex;
+  padding: 0 50px;
+  align-items: center;
+  border-bottom: #70706B 1px solid;
+  justify-content: space-between;
+}
+.inline-item {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.inline-item i{
+  font-size: 18px;
+  font-weight: bold;
+}
+.inline-item .title{
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 30px;
+}
+
+.between-item {
+  justify-content: space-between;
+  width: 1200px;
+}
+.el-pagination{
+  text-align: right;
+  margin-top: 20px;
+}
