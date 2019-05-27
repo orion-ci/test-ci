@@ -5,13 +5,13 @@ build:
     - npm config get registry
     - npm install --ignore-scripts
     - npm run build
-    - docker build -t mocker-consolefrontend:latest .
+    - docker build -t mocker-console-frontend:latest .
   release:
     - python3 env_writer.py  public/abcdefg.html
     - npm config get registry
     - npm install --ignore-scripts
     - npm run build
-    - docker build -t mocker-consolefrontend:latest .
+    - docker build -t mocker-console-frontend:latest .
 email:
   - zhuchenxi@jinuo.me
   - dengjingwen@jinuo.me
