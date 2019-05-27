@@ -10,7 +10,6 @@
     <div class="">
       <el-table
         :data="tableData"
-        @row-click="goApi"
         style="width: 100%">
         <el-table-column
           prop="id"
@@ -32,6 +31,7 @@
           label="操作"
           width="180">
           <template slot-scope="scope">
+            <el-button @click="goApi(scope.row)" type="text" size="small">API管理</el-button>
             <el-button @click.stop="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
             <el-button @click.stop="handleDelete(scope.row)" type="text" size="small">删除</el-button>
           </template>
@@ -92,12 +92,13 @@
       }
     },
     created () {
+      localStorage.setItem('token', 'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJsaVV5UmhkV3lYNzBYc1JPUEZUX0dtdnZzanYtYVhjaXNwckUxTHpyRjZFIn0.eyJqdGkiOiJjMzU4NTM5Yi1iZjE0LTRjMjEtODkxYS1lMDYxNDAyYTZjODkiLCJleHAiOjE1NTkzNjEwMDUsIm5iZiI6MCwiaWF0IjoxNTU4OTI5MDA1LCJpc3MiOiJodHRwOi8vc3NvLmppbnVvLm1lL2F1dGgvcmVhbG1zL0ppbnVvUHJpdmF0ZU5ldHdvcmsiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMjhiNmFmNWQtZDAyMC00YjY0LTljM2MtOTk4NGMyMmUyYWFkIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibW9ja2VyIiwiYXV0aF90aW1lIjoxNTU4NjYzOTMwLCJzZXNzaW9uX3N0YXRlIjoiOWMwOWMyN2UtMTQ4MC00NGEyLThkMWYtYTY2MTc4ZTI3NzAxIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJtb2NrZXIuamludW8ubWUiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IuaVrOaWhyDpgpMiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkZW5namluZ3dlbiIsImdpdmVuX25hbWUiOiLmlazmlociLCJsb2NhbGUiOiJ6aC1DTiIsImZhbWlseV9uYW1lIjoi6YKTIiwiZW1haWwiOiJkZW5namluZ3dlbkBqaW51by5tZSJ9.ZC2VGXBT03SRpvnqwk3QEm7CCOQZ4vUEstYdjIiDUGYdcpxVrS9R6JcC7tU2TaVBBiXZ83SzMl-lnpjE2VSbliBeDiZ2m1NlqJ7hwKP4FKZQN1h1mYMpcQtueCzgtazjOdiOFtyRVemJCjtGFeXy7RytwNOyOSoMEaeQahzv54YgSH1Rnk-veyAJlRSIJCYJXdNO54UH1l0Kzr28-zrKJtQw4WLdG1SpxbE40hB1DvoN47xW0Qy0DaTdD6lvUwPXZ0FSaK5-taOQQM5ebyg8oRI7e0kzxCJYfYg2QmNP7KwsVumKTB-tskO1EGK9SU5pUw4rtU0SjxLMlbvYcp28nw')
       this.search()
     },
     methods: {
-      goApi (e) {
-        console.log(e)
-        this.$router.push(`/dashboard/apis/${e.id}/${e.host}`)
+      goApi (item) {
+        console.log(item)
+        this.$router.push(`/dashboard/apis/${item.id}/${item.host}`)
       },
       resetForm (formName) {
         this.$refs[formName].resetFields()
@@ -163,6 +164,7 @@
         }).then(() => {
           this.$axios.delete(`/projects/${item.id}`).then(res => {
             this.$message.success('删除成功')
+            this.search()
           })
         }).catch(() => {
           this.$message({
