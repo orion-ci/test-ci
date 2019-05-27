@@ -1,0 +1,19 @@
+name: twisted-mainsite-frontend
+build:
+  beta:
+    - python3 env_writer.py  public/abcdefg.html
+    - python3 err_writer.py  ./.env.twisted_beta
+    - npm config get registry
+    - npm install --ignore-scripts
+    - npm run build
+    - docker build -t twisted-mainsite-frontend:latest .
+  release:
+    - python3 env_writer.py  public/abcdefg.html
+    - python3 err_writer.py  ./.env.twisted
+    - npm config get registry
+    - npm install --ignore-scripts
+    - npm run build
+    - docker build -t twisted-mainsite-frontend:latest .
+email:
+  - zhuchenxi@jinuo.me
+  - chenqin@jinuo.me
