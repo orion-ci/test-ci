@@ -175,6 +175,7 @@
         }).then(() => {
           this.$axios.delete(`/projects/${this.projectId}/${item.id}`).then(res => {
             this.$message.success('删除成功')
+            this.getApiList(this.projectId)
           })
         }).catch(() => {
           this.$message({

@@ -163,6 +163,7 @@
         }).then(() => {
           this.$axios.delete(`/projects/${item.id}`).then(res => {
             this.$message.success('删除成功')
+            this.search()
           })
         }).catch(() => {
           this.$message({
