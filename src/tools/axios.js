@@ -46,6 +46,7 @@ service.interceptors.response.use(
         title: '错误',
         message: '认证过期，请重新登录'
       })
+
       setTimeout(() => {
         localStorage.clear()
         router.push('/login')
@@ -55,7 +56,7 @@ service.interceptors.response.use(
       // 请求错误时做些事
       Notification.error({
         title: '错误',
-        message: msg
+        message: error.response.statusText
       })
     }
     return Promise.reject(error)
