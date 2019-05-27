@@ -1,4 +1,4 @@
-name: twisted-mainsite-frontend
+name: mocker-consolefrontend
 build:
   beta:
     - python3 env_writer.py  public/abcdefg.html
