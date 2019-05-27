@@ -7,6 +7,12 @@
   border-bottom: #70706B 1px solid;
   justify-content: space-between;
 }
+.title{
+  font-size: 24px;
+  font-weight: bold;
+  color: #409eff;
+  margin-right: 50px;
+}
 .inline-item {
   display: inline-flex;
   align-items: center;
@@ -30,4 +36,7 @@
 .el-pagination{
   text-align: right;
   margin-top: 20px;
+}
+.el-select{
+  width: 100%;
 }
