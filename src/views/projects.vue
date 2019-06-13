@@ -29,7 +29,7 @@
         <el-table-column
           prop="date"
           label="操作"
-          width="180">
+          width="250">
           <template slot-scope="scope">
             <el-button @click="goApi(scope.row)" type="text" size="small">API管理</el-button>
             <el-button @click.stop="handleEdit(scope.row)" type="text" size="small">编辑</el-button>

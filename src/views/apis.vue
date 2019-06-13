@@ -30,8 +30,9 @@
         <el-table-column
           prop="date"
           label="操作"
-          width="180">
+          width="250">
           <template slot-scope="scope">
+            <el-button @click="goHis(scope.row)" type="text" size="small">请求历史</el-button>
             <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
             <el-button @click="handleConfig(scope.row)" type="text" size="small">配置</el-button>
             <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
@@ -224,6 +225,9 @@
             return false
           }
         })
+      },
+      goHis (item) {
+        this.$router.push(`/dashboard/rqhis/${this.projectId}/${item.id}/${this.$route.params.host}${item.path}`)
       }
     }
   }
