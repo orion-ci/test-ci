@@ -1,7 +1,7 @@
 name: mocker-console-frontend
 build:
   beta:
-    - python3 env_writer.py  public/abcdefg.html
+    - python3 env_writer.py  dist/abcdefg.html
     - npm config get registry
     - npm install --ignore-scripts
     - npm run build
