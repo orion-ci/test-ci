@@ -68,9 +68,9 @@
       }
     },
     mounted () {
-      this.projectId = this.$route.params.projectId
-      this.apiId = this.$route.params.apiId
-      this.path = this.$route.params.host + '/' + this.$route.params.path
+      this.projectId = this.$route.query.projectId
+      this.apiId = this.$route.query.apiId
+      this.path = this.$route.query.host + '/' + this.$route.query.path
       this.getData(this.projectId)
     },
     methods: {

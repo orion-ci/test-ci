@@ -227,7 +227,7 @@
         })
       },
       goHis (item) {
-        this.$router.push(`/dashboard/rqhis/${this.projectId}/${item.id}/${this.$route.params.host}${item.path}`)
+        this.$router.push({path: '/dashboard/rqhis', query: {projectId: this.projectId, apiId: item.id, host: this.$route.params.host, path: item.path}})
       }
     }
   }

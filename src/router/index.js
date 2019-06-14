@@ -33,7 +33,7 @@ export default new Router({
           component: apis
         },
         {
-          path: 'rqhis/:projectId/:apiId/:host/:path',
+          path: 'rqhis',
           name: 'rqhis',
           component: rqhis
         }
