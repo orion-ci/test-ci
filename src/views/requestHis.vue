@@ -71,7 +71,7 @@
       this.projectId = this.$route.query.projectId
       this.apiId = this.$route.query.apiId
       this.path = this.$route.query.host + '/' + this.$route.query.path
-      this.getData(this.projectId)
+      this.getData()
     },
     methods: {
       goBack () {
@@ -79,7 +79,7 @@
       },
       pageChange (e) {
         this.page = e
-        this.getApiList(this.projectId)
+        this.getData(this.projectId)
       },
       getData () {
         const data = {
