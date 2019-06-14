@@ -6,7 +6,7 @@ import router from './../router'
 // 创建一个 axios 实例
 const service = axios.create({
   baseURL: '/api',
-  timeout: 5000 // 请求超时时间
+  timeout: 30000 // 请求超时时间
 })
 
 // 请求拦截器
@@ -52,7 +52,7 @@ service.interceptors.response.use(
         router.push('/login')
       }, 1000)
     } else {
-      let msg = typeof error.response.data === 'object' ? error.response.data.message : '网络错误'
+      // let msg = typeof error.response.data === 'object' ? error.response.data.message : '网络错误'
       // 请求错误时做些事
       Notification.error({
         title: '错误',
