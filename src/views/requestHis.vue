@@ -70,7 +70,7 @@
     mounted () {
       this.projectId = this.$route.query.projectId
       this.apiId = this.$route.query.apiId
-      this.path = this.$route.query.host + '/' + this.$route.query.path
+      this.path = this.$route.query.host + this.$route.query.path
       this.getData()
     },
     methods: {
@@ -86,14 +86,14 @@
           page: this.page,
           count: this.count
         }
-        this.$axios.get(`/projects/${this.projectId}/${this.apiId}/history`, {params: data}).then(res => {
+        this.$axios.get(`/projects/${this.apiId}/history`, {params: data}).then(res => {
           this.tableData = res.items
           this.total = res.totalCount
           this.count = res.curCount
         })
       },
       getAjaxInfo (item) {
-        this.$axios.get(`/projects/${this.projectId}/${this.apiId}/history/${item.id}`).then((res) => {
+        this.$axios.get(`/projects/history/${item.id}`).then((res) => {
           this.dialogVisible = true
           this.ajaxInfo = res
         })
