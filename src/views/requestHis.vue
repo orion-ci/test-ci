@@ -144,7 +144,7 @@
 }
 .body-span{
   display: inline-block;
-  max-width: 10%;
+  max-width: 80%;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
