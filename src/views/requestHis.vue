@@ -42,7 +42,14 @@
       :visible.sync="dialogVisible"
       width="30%">
         <div>
-            <code>{{ajaxInfo}}</code>
+          <p class="info1">
+            <span>{{ajaxInfo.method}}</span>
+            <span>{{path}}</span>
+          </p>
+          <div class="content-box" v-html="ajaxInfo.head"></div>
+          <div class="body-content">
+            {{ajaxInfo.body}}
+          </div>
         </div>
       <span slot="footer" class="dialog-footer">
         <el-button  @click="dialogVisible = false">取 消</el-button>
@@ -52,6 +59,7 @@
   </div>
 </template>
 <script>
+  import {handleTime} from '@/tools/util'
   export default {
     data () {
       return {
@@ -64,7 +72,9 @@
         path: '',
         tableData: [],
         dialogVisible: false,
-        ajaxInfo: {}
+        ajaxInfo: {
+
+        }
       }
     },
     mounted () {
@@ -72,6 +82,7 @@
       this.apiId = this.$route.query.apiId
       this.path = this.$route.query.host + this.$route.query.path
       this.getData()
+      this.dialogVisible = true
     },
     methods: {
       goBack () {
@@ -90,14 +101,36 @@
           this.tableData = res.items
           this.total = res.totalCount
           this.count = res.curCount
+          this.tableData.map((item) => {
+            item.time = handleTime(item.time)
+          })
         })
       },
       getAjaxInfo (item) {
+        this.ajaxInfo = item.method
         this.$axios.get(`/projects/history/${item.id}`).then((res) => {
           this.dialogVisible = true
-          this.ajaxInfo = res
+          this.ajaxInfo = Object.assign(this.ajaxInfo, res)
+          this.ajaxInfo.head = this.ajaxInfo.head.replace(/\u21b5/g, '</br>')
+          this.ajaxInfo.head = this.ajaxInfo.head.replace(/:/g, ' : ')
         })
       }
     }
   }
 </script>
+<style scoped>
+.info1{
+  display: flex;
+  font-weight: bold;
+  font-size: 18px;
+}
+.info1 span:first-child{
+  margin-right: 15px;
+}
+.content-box{
+  text-align: left;
+  font-size: 16px;
+  line-height: 26px;
+  color: #0c0c0c;
+}
+</style>
