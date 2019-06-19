@@ -18,8 +18,12 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="body"
           label="Body">
+          <template slot-scope="scope">
+            <el-tooltip class="item" effect="dark" :content="scope.row.body" placement="bottom">
+              <span class="body-span">{{scope.row.body}}</span>
+            </el-tooltip>
+          </template>
         </el-table-column>
         <el-table-column
           label="操作"
@@ -43,13 +47,11 @@
       width="30%">
         <div>
           <p class="info1">
-            <span>{{ajaxInfo.method}}</span>
+            <span>{{method}}</span>
             <span>{{path}}</span>
           </p>
           <div class="content-box" v-html="ajaxInfo.head"></div>
-          <div class="body-content">
-            {{ajaxInfo.body}}
-          </div>
+          <div class="body-content" v-html="ajaxInfo.body" v-show="ajaxInfo.body!=='null'"></div>
         </div>
       <span slot="footer" class="dialog-footer">
         <el-button  @click="dialogVisible = false">取 消</el-button>
@@ -70,6 +72,7 @@
         projectId: '',
         apiId: '',
         path: '',
+        method: '',
         tableData: [],
         dialogVisible: false,
         ajaxInfo: {
@@ -81,8 +84,8 @@
       this.projectId = this.$route.query.projectId
       this.apiId = this.$route.query.apiId
       this.path = this.$route.query.host + this.$route.query.path
+      this.method = this.$route.query.method
       this.getData()
-      this.dialogVisible = true
     },
     methods: {
       goBack () {
@@ -107,12 +110,13 @@
         })
       },
       getAjaxInfo (item) {
-        this.ajaxInfo = item.method
         this.$axios.get(`/projects/history/${item.id}`).then((res) => {
           this.dialogVisible = true
           this.ajaxInfo = Object.assign(this.ajaxInfo, res)
-          this.ajaxInfo.head = this.ajaxInfo.head.replace(/\u21b5/g, '</br>')
+          this.ajaxInfo.head = this.ajaxInfo.head.replace(/\n/g, '</br>')
           this.ajaxInfo.head = this.ajaxInfo.head.replace(/:/g, ' : ')
+          this.ajaxInfo.body = JSON.stringify(JSON.parse(this.ajaxInfo.body), null, 2)
+          this.ajaxInfo.body = this.ajaxInfo.body.replace(/\n/g, '</br>')
         })
       }
     }
@@ -127,10 +131,22 @@
 .info1 span:first-child{
   margin-right: 15px;
 }
-.content-box{
+.content-box,.body-content{
   text-align: left;
   font-size: 16px;
   line-height: 26px;
   color: #0c0c0c;
+}
+.body-content{
+  margin-top: 30px;
+  border:1px solid #ddd;
+  padding: 33px;
+}
+.body-span{
+  display: inline-block;
+  max-width: 10%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

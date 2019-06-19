@@ -97,7 +97,6 @@
     },
     methods: {
       goApi (item) {
-        console.log(item)
         this.$router.push(`/dashboard/apis/${item.id}/${item.host}`)
       },
       resetForm (formName) {
