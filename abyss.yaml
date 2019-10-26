@@ -1,15 +1,17 @@
 name: mocker-console-frontend
+repo: mocker-console-frontend
 build:
   beta:
     - npm install --ignore-scripts
     - npm run build
     - python3 env_writer.py  dist/abcdefg.html
     - docker build -t mocker-console-frontend:latest .
-  release:
+  prod:
     - npm install --ignore-scripts
     - npm run build
     - python3 env_writer.py  dist/abcdefg.html
     - docker build -t mocker-console-frontend:latest .
+release: orion
 email:
   - zhuchenxi@jinuo.me
   - dengjingwen@jinuo.me
